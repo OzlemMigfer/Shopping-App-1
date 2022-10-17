@@ -1,13 +1,12 @@
 import React from "react";
 import {Text, View} from 'react-native';
 import styles from './Products.styles';
-import Config from 'react-native-config';
+import Config from '../../../config';
 
 const Products = () => {
     return(
         <View>
-            <Text>PRODUCTS</Text>
-            {Config.API_URL}
+            <Text>PRODUCTS {Config.API_URL} </Text>
         </View>
     );
 };
