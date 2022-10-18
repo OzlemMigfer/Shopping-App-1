@@ -5,19 +5,21 @@ import Config from '../../../config';
 import axios from "axios";
 import ProductCard from '../../components/ProductCard';
 import useFetch from '../../hooks/useFetch';
+import Loading from "../../components/Loading/Loading";
+import Error from '../../components/Error/Error';
 
 const Products = () => {
     const {loading, data, error} = useFetch(Config.API_URL);
     
     const renderProduct = ({item}) => <ProductCard product={item} />;
 
-    //spinner
+    //spinner animation
     if(loading){
-        return <ActivityIndicator size="large"/>
+        return <Loading/>
     }
 
     if(error){
-        return <Text>{error}</Text>
+        return <Error/>
     }
 
     return(
