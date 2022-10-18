@@ -12,7 +12,7 @@ export default StyleSheet.create({
         minHeight:100,
         width:100,
         resizeMode:'contain',
-        backgroundColor:'white'
+        backgroundColor:'white '
     },
     body_container:{
         flex:1,

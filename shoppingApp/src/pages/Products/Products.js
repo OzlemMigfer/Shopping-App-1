@@ -1,24 +1,24 @@
 import React, {useState,useEffect} from "react";
-import {Text, View, FlatList} from 'react-native';
+import {Text, View, FlatList, ActivityIndicator} from 'react-native';
 import styles from './Products.styles';
 import Config from '../../../config';
 import axios from "axios";
 import ProductCard from '../../components/ProductCard';
+import useFetch from '../../hooks/useFetch';
 
 const Products = () => {
-    const[data, setData] = useState([]);
-
-    useEffect(() => {
-        fetchData();
-    },[]);
-
-    //verileri çekerken promise yapısını kullanıyoruz
-    const fetchData = async () => {
-        const {data: productData} = await axios.get(Config.API_URL);
-        setData(productData);
-    };
-
+    const {loading, data, error} = useFetch(Config.API_URL);
+    
     const renderProduct = ({item}) => <ProductCard product={item} />;
+
+    //spinner
+    if(loading){
+        return <ActivityIndicator size="large"/>
+    }
+
+    if(error){
+        return <Text>{error}</Text>
+    }
 
     return(
         <View>
