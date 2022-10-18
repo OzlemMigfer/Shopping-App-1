@@ -8,10 +8,16 @@ import useFetch from '../../hooks/useFetch';
 import Loading from "../../components/Loading/Loading";
 import Error from '../../components/Error/Error';
 
-const Products = () => {
+const Products = ({navigation}) => {
     const {loading, data, error} = useFetch(Config.API_URL);
+
+    const handleProductSelect = id => {
+        navigation.navigate('DetailPage', {id});
+    };
     
-    const renderProduct = ({item}) => <ProductCard product={item} />;
+    const renderProduct = ({item}) => (
+        <ProductCard product={item} onSelect={() => handleProductSelect(item.id)}/>
+    );
 
     //spinner animation
     if(loading){
@@ -23,9 +29,7 @@ const Products = () => {
     }
 
     return(
-        <View>
-            <FlatList data={data} renderItem={renderProduct}/>
-        </View>
+        <FlatList data={data} renderItem={renderProduct}/>
     );
 };
 
